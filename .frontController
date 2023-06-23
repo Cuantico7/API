@@ -1,0 +1,44 @@
+<?php
+
+class frontController
+{
+    private $action;
+    private $params;
+    public function proccessRequest()
+    {
+        //echo "Hi Houstons we have a problem ...";
+        //print_r($_REQUEST);
+        if (isset($_REQUEST["url"])) {
+            //echo ("Hi Houston Ok");
+            //print_r($_REQUEST["url"]);
+            $myUrl = explode("/", trim($_REQUEST["url"]));
+            //print_r("<pre>");
+            //print_r($myUrl);
+            $this->action = array_shift($myUrl);
+            //print_r("La accion : " . $this->action . "<br>");
+            //print_r($myUrl);
+            $this->params = $myUrl;
+            $this->dispatcher($this->action, $this->params);
+        } else {
+            print_r("<br>Invalid Action :(");
+        }
+    }
+
+
+    public function dispatcher($action, $params)
+    {
+        $filename = ACTIONS . $action . ".class.php";
+        //print_r($filename);
+        if (is_file($filename)) {
+            require_once $filename;
+            if (!class_exists($action)) {
+                echo "Clase no existe";
+            } else // Si existe
+            {
+                $cmd = new $action();
+                $cmd->execute($params);
+            }
+        } else
+            echo "<br>archivo no existe";
+    }
+}
