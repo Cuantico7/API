@@ -1,0 +1,9 @@
+<?php
+
+require_once "system/Helper.php";
+require_once "config/.settings.inc";
+require_once "bd/mysql.php";
+require_once "modelo/usuariosModelo.class.php";
+require_once "control/usuariosControl.class.php";
+require_once "config/.db.inc";
+require_once "system/View.class.php";

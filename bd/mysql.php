@@ -3,7 +3,7 @@
 class mysql
 {
     var $conexion;
-//metodo para conectar a la base de adtos
+
     function __construct()
     {
         $this->conexion = new mysqli(
